@@ -116,7 +116,7 @@ once and every page updates. Service copy lives in **`src/data/services.js`**.
 Current details in place:
 
 - **Phone:** +255 22 2127326 · +255 766 775 255 · +255 717 039 133
-- **Email:** info@qadosh-freightt.co.tz
+- **Email:** info@qadoshfreight.co.tz
 - **Address:** Twiga House, Room No. 303, Plot No. 230/59, Block 291/59,
   Samora Avenue, Dar es Salaam, Tanzania
 - **Website:** www.qadoshfreight.co.tz
