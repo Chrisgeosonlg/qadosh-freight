@@ -10,6 +10,8 @@ import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import Chatbot from './components/Chatbot'
 import Preloader from './components/Preloader'
+import Privacy from './pages/Privacy'
+import ConsentBanner from './components/ConsentBanner'
 
 export default function App() {
   return (
@@ -25,11 +27,13 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
       <Chatbot />
+      <ConsentBanner />
     </>
   )
 }

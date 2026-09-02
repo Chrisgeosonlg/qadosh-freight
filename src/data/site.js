@@ -20,7 +20,7 @@ export const contact = {
     { display: '+255 766 775 255', tel: '+255766775255' },
     { display: '+255 717 039 133', tel: '+255717039133' },
   ],
-  emails: ['info@qadoshfreight.co.tz', 'pmasatu1974@gmail.com'],
+  emails: ['info@qadosh-freightt.co.tz'],
   address: {
     lines: ['Twiga House, Room No. 303', 'Plot No. 230/59, Block 291/59', 'Samora Avenue'],
     city: 'Dar es Salaam, Tanzania',

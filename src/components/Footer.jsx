@@ -70,7 +70,10 @@ export default function Footer() {
 
       <div className="wrap footer__bar">
         <p style={{ margin: 0 }}>© {year} {company.name}. All rights reserved.</p>
-        <p style={{ margin: 0 }}>Freight forwarding, customs clearing &amp; logistics in Dar es Salaam, Tanzania.</p>
+        <div className="footer__legal">
+          <Link to="/privacy">Privacy Policy</Link>
+          <button type="button" onClick={() => window.dispatchEvent(new Event('qadosh:consent-settings'))}>Cookie preferences</button>
+        </div>
       </div>
     </footer>
   )
