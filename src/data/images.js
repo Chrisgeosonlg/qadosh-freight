@@ -25,7 +25,7 @@ export const img = {
   forklift: u('1601598851547-4302969d0614'), // warehouse forklift
   team: u('1521737604893-d14cc237f11d'), // logistics team
   coverageMap: u('1451187580459-43490279c0fa'), // world / connectivity
-  contactHero: '/images/contact-hero-port.png', // local port, container and truck hero
+  contactHero: `${import.meta.env.BASE_URL}images/contact-hero-port.png`, // local port, container and truck hero
 }
 
 // Per-service hero + card imagery

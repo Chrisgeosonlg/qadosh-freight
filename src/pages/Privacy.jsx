@@ -7,7 +7,7 @@ export default function Privacy() {
   return (
     <>
       <Seo title="Privacy Policy | Qadosh Freight Solutions Limited" description="Learn how Qadosh Freight Solutions Limited collects, uses and protects personal information." path="/privacy" />
-      <PageHero eyebrow="Your privacy" title="Privacy Policy" subtitle="How we collect, use and protect information when you visit our website or contact our team." image="/images/contact-hero-port.png" crumbs={[{ label: 'Home', to: '/' }, { label: 'Privacy Policy' }]} />
+      <PageHero eyebrow="Your privacy" title="Privacy Policy" subtitle="How we collect, use and protect information when you visit our website or contact our team." image={`${import.meta.env.BASE_URL}images/contact-hero-port.png`} crumbs={[{ label: 'Home', to: '/' }, { label: 'Privacy Policy' }]} />
       <section className="section section--tight">
         <article className="wrap policy">
           <p className="policy__updated">Last updated: 2 September 2026</p>

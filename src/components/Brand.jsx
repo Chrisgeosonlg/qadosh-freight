@@ -10,7 +10,7 @@ export default function Brand({ onClick, footer = false }) {
       onClick={onClick}
       aria-label="Qadosh Freight Solutions Limited — home"
     >
-      <img className="brand__mark" src="/images/logo-mark.png" alt="Qadosh Freight Solutions logo" width="44" height="41" />
+      <img className="brand__mark" src={`${import.meta.env.BASE_URL}images/logo-mark.png`} alt="Qadosh Freight Solutions logo" width="44" height="41" />
       <span className="brand__name">
         <b>Qadosh Freight</b>
         <span>Solutions Limited</span>
