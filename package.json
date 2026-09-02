@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Corporate website for Qadosh Freight Solutions Limited",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "vite build",
     "preview": "vite preview"
   },
