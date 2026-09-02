@@ -216,11 +216,6 @@ export default function ContactForm() {
         </div>
       )}
 
-      <p className="form__note">
-        <strong>Note for developers:</strong> set <code>FORM_ENDPOINT</code> in{' '}
-        <code>src/components/ContactForm.jsx</code> to a Formspree or API URL to enable live sending.
-      </p>
-
       <button type="submit" className="btn btn--primary" disabled={status === 'loading'} style={{ justifySelf: 'start' }}>
         {status === 'loading' ? (<><span className="spinner" /> Sending…</>) : (<>Submit enquiry <Icon name="arrow" size={18} className="btn__arrow" /></>)}
       </button>

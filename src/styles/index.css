@@ -548,10 +548,6 @@ p { margin: 0 0 1rem; max-width: 68ch; }
 .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 0.9rem; color: var(--ink-soft); }
 .consent input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--blue); flex: none; }
 .consent.invalid { color: var(--red); }
-.form__note {
-  font-size: 0.82rem; color: var(--ink-soft); background: var(--mist);
-  border: 1px dashed var(--line); border-radius: 10px; padding: 12px 14px;
-}
 .form__status { padding: 14px 16px; border-radius: 10px; font-weight: 600; font-size: 0.94rem; }
 .form__status--ok { background: #e6f6ec; color: #146c43; border: 1px solid #b7e4c7; }
 .form__status--err { background: #fdecec; color: var(--red); border: 1px solid #f5c2c2; }
