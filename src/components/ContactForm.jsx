@@ -10,8 +10,8 @@ import { services } from '../data/services'
 // never pretends to deliver a message it hasn't sent.
 // EmailJS: swap the submit() body for emailjs.send(...) instead.
 // -----------------------------------------------------------------------------
-const FORM_ENDPOINT = ''
-const FORM_RECIPIENT = 'info@qadosh.co.tz'
+const FORM_ENDPOINT = 'https://formspree.io/f/xkjnpqvw'
+const FORM_RECIPIENT = 'info@qadoshfreight.co.tz'
 
 const initial = {
   fullName: '', company: '', email: '', phone: '', service: '',
