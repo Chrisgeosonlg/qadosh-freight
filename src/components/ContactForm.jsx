@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import Icon from './Icon'
 import { services } from '../data/services'
-import { contact } from '../data/site'
 
 // -----------------------------------------------------------------------------
 // INTEGRATION POINT
@@ -12,6 +11,7 @@ import { contact } from '../data/site'
 // EmailJS: swap the submit() body for emailjs.send(...) instead.
 // -----------------------------------------------------------------------------
 const FORM_ENDPOINT = ''
+const FORM_RECIPIENT = 'info@qadosh.co.tz'
 
 const initial = {
   fullName: '', company: '', email: '', phone: '', service: '',
@@ -23,7 +23,7 @@ const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export default function ContactForm() {
   const [values, setValues] = useState(initial)
   const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState(null) // 'loading' | 'success' | 'error' | 'unconnected'
+  const [status, setStatus] = useState(null) // 'loading' | 'success' | 'error' | 'handoff'
 
   const update = (e) => {
     const { name, value, type, checked } = e.target
@@ -58,7 +58,7 @@ export default function ContactForm() {
       '',
       values.message,
     ].join('\n')
-    return `mailto:${contact.emails[0]}?subject=${encodeURIComponent(
+    return `mailto:${FORM_RECIPIENT}?subject=${encodeURIComponent(
       `Quote request — ${values.service || 'General enquiry'}`
     )}&body=${encodeURIComponent(body)}`
   }, [values])
@@ -72,9 +72,9 @@ export default function ContactForm() {
     setStatus('loading')
 
     if (!FORM_ENDPOINT) {
-      // No backend connected — hand off honestly rather than fake a send.
-      await new Promise((r) => setTimeout(r, 500))
-      setStatus('unconnected')
+      // Static-site fallback: open a complete, addressed draft in the visitor's email app.
+      setStatus('handoff')
+      window.location.href = mailtoHref
       return
     }
 
@@ -199,18 +199,17 @@ export default function ContactForm() {
       {status === 'error' && (
         <div className="form__status form__status--err" role="alert">
           Something went wrong sending your enquiry. Please try again, or email us directly at{' '}
-          <a href={`mailto:${contact.emails[0]}`}>{contact.emails[0]}</a>.
+          <a href={`mailto:${FORM_RECIPIENT}`}>{FORM_RECIPIENT}</a>.
         </div>
       )}
 
-      {status === 'unconnected' && (
+      {status === 'handoff' && (
         <div className="form__status form__status--ok" role="status">
-          <strong style={{ display: 'block', marginBottom: 6 }}>Your details are ready to send.</strong>
-          This form isn't connected to a mail service yet, so nothing has been transmitted. Use the
-          button below to send your enquiry from your own email app, or connect a backend (see README).
+          <strong style={{ display: 'block', marginBottom: 6 }}>Your email draft is ready.</strong>
+          Your email app should open with the enquiry addressed to {FORM_RECIPIENT}. Review it and press Send.
           <div style={{ marginTop: 12 }}>
             <a className="btn btn--primary btn--sm" href={mailtoHref}>
-              Open in email app <Icon name="mail" size={16} />
+              Open email again <Icon name="mail" size={16} />
             </a>
           </div>
         </div>
