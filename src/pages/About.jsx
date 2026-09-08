@@ -62,7 +62,7 @@ export default function About() {
           </Reveal>
           <div className="steps" style={{ marginTop: 34, maxWidth: 820 }}>
             <Reveal className="step">
-              <div className="step__n">2019</div>
+              <div className="step__n step__n--year">2019</div>
               <div>
                 <h3>Registered in Tanzania</h3>
                 <p>Qadosh Freight Solutions Limited is established and registered under the regulations of Tanzania.</p>

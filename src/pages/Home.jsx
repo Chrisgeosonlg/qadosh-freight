@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
 import Icon from '../components/Icon'
@@ -12,7 +13,56 @@ import {
   company, coreValues, whyChoose, coverage, stats, mission, vision, contact,
 } from '../data/site'
 
+const heroSlides = [
+  {
+    image: img.heroHome,
+    eyebrow: 'Port-to-premise logistics',
+    title: 'Moving your business forward, from port to premise.',
+    text: 'Efficient customs clearance, freight forwarding, transportation, air freight and warehousing—from arrival through delivery.',
+    trust: 'Reliable logistics solutions across Tanzania and the wider African region.',
+  },
+  {
+    image: img.truck,
+    eyebrow: 'Regional road transport',
+    title: 'Your cargo, delivered safely and on schedule.',
+    text: 'Dependable road freight connects Dar es Salaam with destinations across Tanzania, East Africa and Central Africa.',
+    trust: 'Coordinated transport with clear updates at every stage.',
+  },
+  {
+    image: img.plane,
+    eyebrow: 'Fast global connections',
+    title: 'Air freight built for urgent shipments.',
+    text: 'When timing matters, we coordinate responsive air cargo and smooth customs clearance from airport to final destination.',
+    trust: 'Responsive handling for time-sensitive consignments.',
+  },
+  {
+    image: img.warehouse,
+    eyebrow: 'Secure warehousing',
+    title: 'Flexible storage that keeps your supply chain moving.',
+    text: 'Protect your goods with secure, organised warehousing and inventory handling tailored to your operational needs.',
+    trust: 'Safe storage and careful cargo handling you can rely on.',
+  },
+]
+
 export default function Home() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [isHoverPaused, setIsHoverPaused] = useState(false)
+
+  useEffect(() => {
+    if (!isPlaying || isHoverPaused) return undefined
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length)
+    }, 6500)
+    return () => window.clearInterval(timer)
+  }, [isPlaying, isHoverPaused])
+
+  const showSlide = (index) => {
+    setActiveSlide((index + heroSlides.length) % heroSlides.length)
+  }
+
+  const slide = heroSlides[activeSlide]
+
   return (
     <>
       <Seo
@@ -22,28 +72,63 @@ export default function Home() {
       />
 
       {/* 1 — HERO */}
-      <section className="hero">
-        <div className="hero__media">
-          <img src={img.heroHome} alt="Container terminal with cargo ships and stacked shipping containers at a busy port" fetchpriority="high" />
+      <section
+        className="hero"
+        aria-roledescription="carousel"
+        aria-label="Qadosh Freight services"
+        onMouseEnter={() => setIsHoverPaused(true)}
+        onMouseLeave={() => setIsHoverPaused(false)}
+      >
+        <div className="hero__media" aria-hidden="true">
+          {heroSlides.map((item, index) => (
+            <img
+              key={item.image}
+              className={index === activeSlide ? 'is-active' : ''}
+              src={item.image}
+              alt=""
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+            />
+          ))}
         </div>
         <div className="hero__scrim" />
         <div className="wrap hero__inner">
-          <span className="eyebrow hero__eyebrow">Port-to-premise logistics</span>
-          <h1 className="h-xl">Moving your business forward, from port to premise.</h1>
-          <p className="hero__sub">
-            Qadosh Freight Solutions delivers efficient customs clearance, freight forwarding,
-            transportation, air freight and warehousing — so your cargo keeps moving from the
-            moment it lands to the moment it reaches your door.
-          </p>
-          <div className="hero__actions">
-            <Link to="/contact#quote" className="btn btn--primary">
-              Request a Quote <Icon name="arrow" size={18} className="btn__arrow" />
-            </Link>
-            <Link to="/services" className="btn btn--ghost-light">Explore Our Services</Link>
+          <div className="hero__content" key={activeSlide} aria-live="polite" aria-atomic="true">
+            <span className="eyebrow hero__eyebrow">{slide.eyebrow}</span>
+            <h1 className="h-xl">{slide.title}</h1>
+            <p className="hero__sub">{slide.text}</p>
+            <div className="hero__actions">
+              <Link to="/contact#quote" className="btn btn--primary">
+                Request a Quote <Icon name="arrow" size={18} className="btn__arrow" />
+              </Link>
+              <Link to="/services" className="btn btn--ghost-light">Explore Our Services</Link>
+            </div>
+            <div className="hero__trust">
+              <span className="dot" />
+              {slide.trust}
+            </div>
           </div>
-          <div className="hero__trust">
-            <span className="dot" />
-            Reliable logistics solutions across Tanzania and the wider African region.
+          <div className="hero__nav" aria-label="Hero slide controls">
+            <button className="hero__arrow hero__arrow--prev" type="button" onClick={() => showSlide(activeSlide - 1)} aria-label="Previous slide">
+              <Icon name="arrow" size={18} />
+            </button>
+            <div className="hero__dots">
+              {heroSlides.map((item, index) => (
+                <button
+                  key={item.title}
+                  type="button"
+                  className={`hero__dot${index === activeSlide ? ' is-active' : ''}`}
+                  onClick={() => showSlide(index)}
+                  aria-label={`Show slide ${index + 1}: ${item.eyebrow}`}
+                  aria-current={index === activeSlide ? 'true' : undefined}
+                />
+              ))}
+            </div>
+            <button className="hero__play" type="button" onClick={() => setIsPlaying((playing) => !playing)} aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}>
+              <Icon name={isPlaying ? 'pause' : 'play'} size={16} />
+            </button>
+            <button className="hero__arrow" type="button" onClick={() => showSlide(activeSlide + 1)} aria-label="Next slide">
+              <Icon name="arrow" size={18} />
+            </button>
           </div>
         </div>
       </section>
