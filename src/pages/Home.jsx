@@ -47,15 +47,14 @@ const heroSlides = [
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
-  const [isHoverPaused, setIsHoverPaused] = useState(false)
 
   useEffect(() => {
-    if (!isPlaying || isHoverPaused) return undefined
+    if (!isPlaying) return undefined
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length)
     }, 5000)
     return () => window.clearInterval(timer)
-  }, [isPlaying, isHoverPaused])
+  }, [isPlaying])
 
   const showSlide = (index) => {
     setActiveSlide((index + heroSlides.length) % heroSlides.length)
@@ -72,13 +71,7 @@ export default function Home() {
       />
 
       {/* 1 — HERO */}
-      <section
-        className="hero"
-        aria-roledescription="carousel"
-        aria-label="Qadosh Freight services"
-        onMouseEnter={() => setIsHoverPaused(true)}
-        onMouseLeave={() => setIsHoverPaused(false)}
-      >
+      <section className="hero" aria-roledescription="carousel" aria-label="Qadosh Freight services">
         <div className="hero__media" aria-hidden="true">
           {heroSlides.map((item, index) => (
             <img
