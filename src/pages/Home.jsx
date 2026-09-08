@@ -53,7 +53,7 @@ export default function Home() {
     if (!isPlaying || isHoverPaused) return undefined
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length)
-    }, 4000)
+    }, 5000)
     return () => window.clearInterval(timer)
   }, [isPlaying, isHoverPaused])
 
